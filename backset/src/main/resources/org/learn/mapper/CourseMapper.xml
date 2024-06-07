@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.learn.mapper.CourseMapper">
+    <!--动态sql-->
+    <select id="userCourseList" resultType="org.learn.pojo.Course">
+        select * from course
+        <where>
+        <if test="state!=null">
+        and state=#{state}
+        </if>
+        <if test="type!=null">
+        and type=#{type}
+        </if>
+        and classes= (select student.class_in from student where student.id=#{userId}) or teacher_id = #{userId}
+        </where>
+    </select>
+    <select id="courseList" resultType="org.learn.pojo.Course">
+        select * from course
+        <where>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+            <if test="type!=null">
+                and type=#{type}
+            </if>
+        </where>
+    </select>
+    <select id="classList" resultType="org.learn.pojo.Student">
+        select distinct department,spe,class_in from student
+        <where>
+            <if test="department!=null">
+                and department=#{department}
+            </if>
+            <if test="spe!=null">
+                and spe=#{spe}
+            </if>
+        </where>
+    </select>
+</mapper>

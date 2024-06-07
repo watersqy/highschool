@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.learn.mapper.UserMapper">
+    <select id="list" resultType="org.learn.pojo.User">
+        select * from user
+        <where>
+            <if test="root!=null">
+                and root=#{root}
+            </if>
+            <if test="username!=null">
+                and username=#{username}
+            </if>
+        </where>
+    </select>
+    <select id="teacherList" resultType="org.learn.pojo.Teacher">
+        select * from teacher
+        <where>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+            <if test="department!=null">
+                and department=#{department}
+            </if>
+        </where>
+    </select>
+    <select id="studentList" resultType="org.learn.pojo.Student">
+        select * from student
+        <where>
+            <if test="state!=null">
+                and state=#{state}
+            </if>
+            <if test="department!=null">
+                and department=#{department}
+            </if>
+            <if test="spe!=null">
+                and spe=#{spe}
+            </if>
+            <if test="classIn!=null">
+                and class_in=#{classIn}
+            </if>
+        </where>
+    </select>
+</mapper>
